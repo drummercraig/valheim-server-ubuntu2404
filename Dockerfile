@@ -1,5 +1,10 @@
 FROM ubuntu:24.04
 
+RUN mkdir -p /steamcmd && \
+    cd /steamcmd && \
+    wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz && \
+    tar -xvzf steamcmd_linux.tar.gz
+
 # Install dependencies
 RUN apt-get update && apt-get install -y \
     wget curl unzip rsync cron libglib2.0-0 libpulse0 \

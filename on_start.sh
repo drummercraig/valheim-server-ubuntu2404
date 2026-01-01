@@ -1,4 +1,9 @@
 #!/bin/bash
+if [ ! -f "$VALHEIM_SERVER_DIR/valheim_server.x86_64" ]; then
+    echo "[INSTALL] Installing Valheim server..."
+    $STEAMCMD_DIR/steamcmd.sh +login anonymous +force_install_dir $VALHEIM_SERVER_DIR +app_update 896660 validate +quit
+fi
+
 echo "[EVENT] Server starting..."
 source settings.env
 
@@ -23,8 +28,12 @@ case "$MOD_LOADER" in
     echo "[MOD LOADER] Selected: BepInEx"
     if [ ! -d "$VALHEIM_SERVER_DIR/BepInEx" ]; then
       echo "[MOD LOADER] Installing BepInEx..."
-      wget -q "${BEPINEX_URL}"
-      unzip -q BepInEx_UnityMono_x64_5.4.21.0.zip -d $VALHEIM_SERVER_DIR
+      #wget -q "${BEPINEX_URL}"
+      #unzip -q BepInEx_UnityMono_x64_5.4.21.0.zip -d $VALHEIM_SERVER_DIR
+      
+      wget -O BepInEx.zip "${BEPINEX_URL}"
+      unzip -q BepInEx.zip -d $VALHEIM_SERVER_DIR
+
     fi
     echo "[MOD LOADER] Syncing BepInEx mods..."
     bash plugin_sync.sh
@@ -35,8 +44,12 @@ case "$MOD_LOADER" in
     echo "[MOD LOADER] Selected: ValheimPlus"
     if [ ! -d "$VALHEIM_SERVER_DIR/BepInEx" ]; then
       echo "[MOD LOADER] Installing ValheimPlus..."
-      wget -q "${VALHEIMPLUS_URL}"
-      unzip -q UnixServer.zip -d $VALHEIM_SERVER_DIR
+      #wget -q "${VALHEIMPLUS_URL}"
+      #unzip -q UnixServer.zip -d $VALHEIM_SERVER_DIR
+      
+      wget -O ValheimPlus.zip "${VALHEIMPLUS_URL}"
+      unzip -q ValheimPlus.zip -d $VALHEIM_SERVER_DIR
+
     fi
     echo "[MOD LOADER] Syncing ValheimPlus mods..."
     bash plugin_sync.sh
