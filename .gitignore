@@ -1,0 +1,31 @@
+
+# Ignore Valheim data directories
+valheim-data/worlds/*
+valheim-data/backups/*
+valheim-data/BepInEx/plugins/*
+valheim-data/BepInEx/patchers/*
+valheim-data/BepInEx/config/*
+
+# Ignore logs
+*.log
+valheim-data/*.log
+
+# Ignore temporary files
+*.tmp
+*.swp
+*.bak
+
+# Ignore SteamCMD cache
+steamcmd/*
+steamcmd.zip
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore container build artifacts
+*.tar
+*.gz
+
+# Ignore environment files with secrets
+.env

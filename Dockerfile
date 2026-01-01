@@ -7,16 +7,15 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Create directories
-RUN mkdir -p /valheim /steamcmd /scripts /hooks /config
+RUN mkdir -p /valheim /steamcmd
 
-# Copy scripts and hooks
-COPY scripts/ /scripts/
-COPY hooks/ /hooks/
-COPY config/settings.env /config/settings.env
+# Copy scripts
+COPY . /valheim-server
+WORKDIR /valheim-server
 
 # Make scripts executable
-RUN chmod +x /scripts/*.sh /hooks/*.sh
+RUN chmod +x *.sh
 
 EXPOSE 2456-2458/udp
 
-CMD ["/hooks/on_start.sh"]
+CMD ["./on_start.sh"]
