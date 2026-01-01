@@ -1,0 +1,56 @@
+
+services:
+  valheim:
+    build: .
+    image: drummercraig/valheim-server-ubuntu2404
+    container_name: valheim-server
+    environment:
+      # === Server Identity ===
+      - SERVER_NAME=My Valheim Server
+      - WORLD_NAME=Dedicated
+      - SERVER_PASSWORD=secret
+      - SERVER_PUBLIC=1
+      - SERVER_PORT=2456
+
+      # === Crossplay ===
+      - CROSSPLAY_ENABLED=false
+
+      # === World Modifiers ===
+      - MODIFIER_COMBAT=hard
+      - MODIFIER_RESOURCES=more
+      - MODIFIER_PORTALS=casual
+      - MODIFIER_DEATHPENALTY=casual
+      - SETKEY_PLAYEREVENTS=true
+
+      # === Backup Settings ===
+      - BACKUP_SAVEINTERVAL=1800
+      - BACKUP_COUNT=96
+      - BACKUP_SHORT=7200
+      - BACKUP_LONG=43200
+
+      # === Scheduled Restarts ===
+      - RESTART_CRON=0 5 * * *
+      - RESTART_IF_IDLE=true
+      - TZ=America/Phoenix
+
+      # === BepInEx Mods ===
+      - BEPINEX_ENABLED=true
+
+      # === System ===
+      - PUID=1000
+      - PGID=1000
+
+      # === Paths ===
+      - PLUGIN_SRC=/valheim-data/BepInEx/plugins
+      - PLUGIN_DEST=/valheim/BepInEx/plugins
+      - PATCHER_SRC=/valheim-data/BepInEx/patchers
+      - PATCHER_DEST=/valheim/BepInEx/patchers
+      - CONFIG_SRC=/valheim-data/BepInEx/config
+      - CONFIG_DEST=/valheim/BepInEx/config
+      - WORLD_SRC=/valheim-data/worlds
+      - WORLD_BACKUP=/valheim-data/backups
+    volumes:
+      - ./valheim-data:/valheim-data
+    ports:
+      - "2456-2458:2456-2458/udp"
+    restart: unless-stopped

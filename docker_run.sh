@@ -1,0 +1,36 @@
+#!/bin/bash
+docker run -d \
+  --name valheim-server \
+  -e SERVER_NAME="My Valheim Server" \
+  -e WORLD_NAME="Dedicated" \
+  -e SERVER_PASSWORD="secret" \
+  -e SERVER_PUBLIC=1 \
+  -e SERVER_PORT=2456 \
+  -e CROSSPLAY_ENABLED=false \
+  -e MODIFIER_COMBAT=hard \
+  -e MODIFIER_RESOURCES=more \
+  -e MODIFIER_PORTALS=casual \
+  -e MODIFIER_DEATHPENALTY=casual \
+  -e SETKEY_PLAYEREVENTS=true \
+  -e BACKUP_SAVEINTERVAL=1800 \
+  -e BACKUP_COUNT=96 \
+  -e BACKUP_SHORT=7200 \
+  -e BACKUP_LONG=43200 \
+  -e RESTART_CRON="0 5 * * *" \
+  -e RESTART_IF_IDLE=true \
+  -e TZ=America/Phoenix \
+  -e BEPINEX_ENABLED=true \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e PLUGIN_SRC=/valheim-data/BepInEx/plugins \
+  -e PLUGIN_DEST=/valheim/BepInEx/plugins \
+  -e PATCHER_SRC=/valheim-data/BepInEx/patchers \
+  -e PATCHER_DEST=/valheim/BepInEx/patchers \
+  -e CONFIG_SRC=/valheim-data/BepInEx/config \
+  -e CONFIG_DEST=/valheim/BepInEx/config \
+  -e WORLD_SRC=/valheim-data/worlds \
+  -e WORLD_BACKUP=/valheim-data/backups \
+  -v ./valheim-data:/valheim-data \
+  -p 2456-2458:2456-2458/udp \
+  --restart unless-stopped \
+  valheim-server:latest
