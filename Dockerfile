@@ -1,5 +1,14 @@
 FROM ubuntu:24.04
 
+# Copy settings.env into the image
+COPY settings.env /valheim/settings.env
+
+# Load environment variables from settings.env
+# This converts key=value pairs into ENV instructions
+RUN export $(cat /valheim/settings.env | xargs) && \
+    echo "STEAMCMD_DIR=${STEAMCMD_DIR}, VALHEIM_SERVER_DIR=${VALHEIM_SERVER_DIR}"
+
+
 # Install dependencies
 RUN apt-get update && apt-get install -y \
     wget curl unzip rsync cron libglib2.0-0 libpulse0 \
