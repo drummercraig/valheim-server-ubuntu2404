@@ -4,7 +4,7 @@ services:
     image: drummercraig/valheim-server-ubuntu2404
     container_name: valheim-server
     env_file:
-      - .env
+      - settings.env
     volumes:
       - ./valheim-data:/valheim-data
     ports:
