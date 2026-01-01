@@ -1,4 +1,3 @@
-
 #!/bin/bash
 echo "[EVENT] Server starting..."
 source settings.env

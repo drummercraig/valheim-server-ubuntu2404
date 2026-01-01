@@ -1,4 +1,3 @@
-
 #!/bin/bash
 echo "[INSTALL] Installing ValheimPlus..."
 mkdir -p $VALHEIM_SERVER_DIR

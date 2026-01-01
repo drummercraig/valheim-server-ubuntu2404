@@ -1,4 +1,3 @@
-
 #!/bin/bash
 echo "[AUTO RESTART] Checking if restart is allowed..."
 if [ "$RESTART_IF_IDLE" = "true" ]; then

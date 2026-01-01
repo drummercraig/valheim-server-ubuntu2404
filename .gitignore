@@ -1,4 +1,3 @@
-
 # Ignore Valheim data directories
 valheim-data/worlds/*
 valheim-data/backups/*

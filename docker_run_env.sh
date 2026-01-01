@@ -1,4 +1,3 @@
-
 #!/bin/bash
 # Run Valheim Server using environment variables from .env file
 
